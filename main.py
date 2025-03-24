@@ -15,22 +15,19 @@ def count_of_words (inputed_text):
 def the_longest_word (inputed_text):
     list_of_words = inputed_text.split()
     longest_word = ""
-    max_lenth = 0
-    for i in list_of_words:
-        current_word = i
-        if len(current_word) > max_lenth:
-            max_lenth = len(current_word)
+    for current_word in list_of_words:
+        if len(current_word) > len(longest_word):
             longest_word = current_word
     return longest_word
 
 
 def counf_of_vowels(inputed_text):
     list_of_vowels = 'ёeyuoaуеыаоэяию'
-    result = ''
+    counter = 0
     for letter in inputed_text:
         if letter in list_of_vowels:
-            result += letter
-    return len(result)
+            counter += 1
+    return counter
 
 
 def count_of_inter(inputed_text):
@@ -40,8 +37,13 @@ def count_of_inter(inputed_text):
     for word in list_of_words:
         if word not in list_of_unique_words:
             list_of_unique_words.append(word)
-    for word in list_of_unique_words:
-        result += word + " - x" + str(inputed_text.count(word)) + ", "
+    return list_of_unique_words
+
+
+def nice_word_counter_output(inputed_text, unique_list):
+    result = ''
+    for word in unique_list:
+        result += word + " (x" + str(inputed_text.count(word)) + "), "
     result = result[:-2]
     return result
 
@@ -55,4 +57,4 @@ print(f"""В введенном вами тексте:
 1. Количество слов: {count_of_words(usable_text)}.
 2. Самое длинное слово: {the_longest_word(usable_text)}.
 3. Количество гласных: {counf_of_vowels(usable_text)}.
-4. Количество уникальных слов: {count_of_inter(usable_text)}.""")
+4. Количество уникальных слов: {nice_word_counter_output(usable_text, count_of_inter(usable_text))}.""")
